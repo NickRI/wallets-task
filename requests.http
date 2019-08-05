@@ -1,0 +1,37 @@
+GET http://localhost:8080/wallet/accounts
+
+###
+GET http://localhost:8080/wallet/ledgers
+
+###
+
+POST http://localhost:8080/wallet/pay/alice123/bob456
+
+{
+  "amount": 6.00013
+}
+
+###
+
+POST http://localhost:8080/wallet/pay/alice1232/bob456
+
+{
+  "amount": 6.00013
+}
+
+###
+
+POST http://localhost:8080/wallet/pay/alice123/bob4567
+
+{
+  "amount": 7.00013
+}
+
+###
+
+POST http://localhost:8080/wallet/pay/bob456/alice123
+
+{
+  "amount": 7
+}
+###

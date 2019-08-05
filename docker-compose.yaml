@@ -1,0 +1,42 @@
+version: '3.6'
+services:
+  db:
+    image: postgres:11.4
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./config/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+    environment:
+      POSTGRES_DB: wallet
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 6vdDtPeA51SGJvb
+
+  migration:
+    build: ./db/migrations
+    working_dir: /app
+    command: goose up
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  app:
+    build: .
+    expose:
+      - "8080"
+    depends_on:
+      - db
+      - migration
+
+  nginx:
+    image: nginx:1.17.2
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres:

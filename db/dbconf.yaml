@@ -1,0 +1,5 @@
+driver: postgres
+dsn: user=user password=6vdDtPeA51SGJvb host=db port=5432 dbname=wallet sslmode=disable
+max-open-connections: 1000
+max-idle-connections: 300
+conn-max-lifetime: 100ms
