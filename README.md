@@ -1,9 +1,8 @@
 # wallets-task
 
-## Getting Started
+## Getting started
 
-This microservice describe and realize business logic for simple wallet thought rest api interface for e-wallet handling
-based on [DDD](https://dddcommunity.org) approach.
+This microservice describe and realize business logic for e-wallet handling based on [DDD](https://dddcommunity.org) approach.
 
 These instructions will help you to up and running service on your local machine for development and testing purposes.
 
