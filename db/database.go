@@ -18,5 +18,5 @@ func Init() (*sql.DB, error) {
 	db.SetMaxIdleConns(viper.GetInt("max-idle-connections"))
 	db.SetConnMaxLifetime(viper.GetDuration("conn-max-lifetime"))
 
-	return db, nil
+	return db, db.Ping()
 }
