@@ -14,7 +14,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var branch, commit string
+var branch, commit, tag string
 
 const (
 	configFormat = "yaml"
@@ -66,7 +66,7 @@ func main() {
 
 	go server.Run()
 
-	logger.Log("branch", branch, "commit", commit, "msg", "server is running", "host", hostAddress)
+	logger.Log("branch", branch, "tag", tag, "commit", commit, "msg", "server is running", "host", hostAddress)
 
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)

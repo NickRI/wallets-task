@@ -1,10 +1,11 @@
 FROM golang:1.12.6 AS build
 ARG BRANCH
 ARG COMMIT
+ARG TAG
 COPY . /app
 WORKDIR /app
 RUN curl -o ./ca-certificates.crt https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o walletsvc -ldflags="-X main.branch=${BRANCH} -X main.commit=${COMMIT} -s -w" ./cmd/walletsvc/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o walletsvc -ldflags="-X main.branch=${BRANCH} -X main.tag=${TAG} -X main.commit=${COMMIT} -s -w" ./cmd/walletsvc/main.go
 RUN chmod +x ./walletsvc
 
 FROM scratch

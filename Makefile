@@ -1,19 +1,19 @@
 BRANCH := $(shell git branch | grep \* | cut -d ' ' -f2)
 COMMIT := $(shell git rev-parse HEAD)
-
+TAG := $(shell git describe --abbrev=0 --tags)
 
 init:
 	GO111MODULE=off go get -u github.com/tsenart/vegeta
 	GO111MODULE=off go get github.com/steinbacher/goose/cmd/goose
 
 build:
-	docker build --rm -t wallet-svc:$(BRANCH)-$(COMMIT) --build-arg BRANCH=$(BRANCH) --build-arg COMMIT=$(COMMIT) .
+	docker build --rm -t wallet-svc:$(BRANCH)-$(TAG)-$(COMMIT) --build-arg TAG=$(TAG) --build-arg BRANCH=$(BRANCH) --build-arg COMMIT=$(COMMIT) .
 
 docker-compose-build:
-	docker-compose build --force-rm --build-arg BRANCH=$(BRANCH) --build-arg COMMIT=$(COMMIT)
+	docker-compose build --force-rm --build-arg TAG=$(TAG) --build-arg BRANCH=$(BRANCH) --build-arg COMMIT=$(COMMIT)
 
 docker-compose-up:
-	docker-compose up
+	docker-compose up -d
 
 docker-compose-down:
 	docker-compose down

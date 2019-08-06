@@ -80,7 +80,7 @@ Optionally you can to build all related local images by running:
 $ make docker-compose-build
 ```
 
-This will also pass $BRANCH and $COMMIT variables to app image. That will "sign" service binary in main app container in build phase.
+This will also pass $TAG, $BRANCH and $COMMIT variables to app image. That will "sign" service binary in main app container in build phase.
 
  
 To start up project services, and apply all migrations:
