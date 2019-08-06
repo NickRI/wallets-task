@@ -2,16 +2,16 @@
 
 ## Getting Started
 
-This micro service provides business logic for simple wallet rest api interface for e-wallet handling
+This microservice describe and realize business logic for simple wallet thought rest api interface for e-wallet handling
 based on [DDD](https://dddcommunity.org) approach.
 
 These instructions will help you to up and running service on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-**You can skip prerequisites and local setup and skip it for [docker-compose](#compose) point**
+**You can skip prerequisites, local setup and skip it for [docker-compose](#compose) point**
 
-You need [goose](https://github.com/steinbacher/goose) utility for migrations, [vegeta](https://github.com/tsenart/vegeta) for load testing
+Service required [goose](https://github.com/steinbacher/goose) utility for migrations, [vegeta](https://github.com/tsenart/vegeta) for load testing
 
 To install it automatically use:
 
@@ -21,15 +21,15 @@ $ make init
 
 ### Project structure
 
-- cmd - contains main files for walletsvc and docgen.
-- config - hold main app configuration and configs that mapped for [docker-compose](#compose).
-- db - migrations sql files, initialization, config, types and models
-- docs - project documentation.
-- domain - domain layer source code, domain model, repository interfaces, domain services interfaces.
-- infrastructure - infrastructure layer source code, services and gateway implementation.
-- internal - generated mocks, internal modules
-- transport - contains endpoints, application layer source code for http interactions
-- vendor - contains vendored dependencies 
+- **cmd** - contains main files for walletsvc and docgen.
+- **config** - hold main app configuration and configs that mapped for [docker-compose](#compose).
+- **db** - migration's sql files, initialization, config, types and models
+- **docs** - project documentation.
+- **domain** - domain layer source code, domain model, repository interfaces, domain services interfaces.
+- **infrastructure** - infrastructure layer source code, services and gateway implementation.
+- **internal** - generated mocks, internal modules
+- **transport** - contains endpoints, application layer source code for http interactions
+- **vendor** - contains vendored dependencies 
 
 # Local setup 
 
@@ -52,7 +52,6 @@ After successful configuration you can run **walletscv** service by:
 $ go run ./cmd/walletsvc/main.go
 ```
 
-
 ### Api documentation 
 
 Auto-generated api documentation stored in [docs/api.md](docs/api.md)
@@ -70,9 +69,9 @@ $ go run ./cmd/docgen/main.go
 
 Docker compose stack:
 
-- **db** - main database service, have mounted local config [config/postgresql.conf](config/postgresql.conf)
-- **nginx** - service that provides proxy & load balancer, that provides main application saleability, have mounted local config [config/nginx.conf](config/nginx.conf)
-- **app** - main service contain walletsvc micro-service
+- **db** - main database service, has local config [config/postgresql.conf](config/postgresql.conf)
+- **nginx** - service that provides proxy & load balancer, that provides main application saleability, has local config [config/nginx.conf](config/nginx.conf)
+- **app** - main service contain walletsvc microservice
 - **migration** - short-live container that will migrate up your data
 
 Optionally you can to build all related local images by running:
@@ -81,10 +80,10 @@ Optionally you can to build all related local images by running:
 $ make docker-compose-build
 ```
 
-This will also pass $BRANCH & $COMMIT variables to app image. That will "sign" binary in main app container.
+This will also pass $BRANCH and $COMMIT variables to app image. That will "sign" service binary in main app container in build phase.
 
  
-Stand up project's services:
+To start up project services, and apply all migrations:
 
 ```shell
 $ make docker-compose-up
@@ -99,34 +98,35 @@ $ make docker-compose-down
 
 #### Docker build
 
-Use this command for auto build:
+Separately you can build walletscv service container. Use this command for the auto build:
 ```shell
 $ make build
 ```  
 
 ### Running the tests
 
-Project uses [gomock](https://github.com/golang/mock) and [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock) 
-
-You can regenerate mocks using:
-```shell
-$ go generate ./...
-```
-
 ```shell
 $ make test
 ``` 
-To run unit tests for all subdirectories:
+To run unit tests for all subdirectories.
 
 ```shell
 $ make test-integration
 ```
-Provides integration tests, based on parallel http servers that runs from one point, uses docker-compose's system parts
+Provides integration tests, based on parallel http servers that runs from one point, uses docker-compose system parts.
 
 ```shell
 $ make docker-scale-load-test
 ```
-For 2 nodes scale test based on vegeta load util, was made for fun ;)
+For 2 nodes scale test based on vegeta util, was made for fun ;)
+
+#### Mocking
+Project uses [gomock](https://github.com/golang/mock) and [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock) 
+
+You can regenerate mocking structures by using:
+```shell
+$ go generate ./...
+```
 
 ## Built With
 - [chi framework](https://github.com/go-chi/chi)
@@ -138,4 +138,10 @@ For 2 nodes scale test based on vegeta load util, was made for fun ;)
 
 ## Contributions
 
-Feel free to open a pull request. Note, if you wish to contribute an extension to public (exported methods or types) - please open an issue before, to discuss whether these changes can be accepted. All backward incompatible changes are and will be treated cautiously
+Please refer to each project's style and contribution guidelines for submitting patches and additions. In general, we follow the "fork-and-pull" Git workflow.
+
+ 1. **Fork** the repo on GitHub
+ 2. **Clone** the project to your own machine
+ 3. **Commit** changes to your own branch
+ 4. **Push** your work back up to your fork
+ 5. Submit a **Pull request** so that we can review your changes
