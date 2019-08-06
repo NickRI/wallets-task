@@ -61,7 +61,7 @@ Project uses [chi-docgen](http://github.com/go-chi/docgen) utility to auto-gener
 $ go run ./cmd/docgen/main.go
 ```
 
-#<a name="compose"></a> Docker-compose
+# <a name="compose"></a> Docker-compose
 
 - docker-compose version 1.24.1, build 4667896b
 - docker engine 19.03.1
